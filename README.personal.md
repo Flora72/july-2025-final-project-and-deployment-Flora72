@@ -10,10 +10,10 @@
   Practiced semantic HTML, responsive CSS, and soft JavaScript interactions. Structured a multipage site with intentional navigation and emotional pacing.
 
 - **Emotional Design**  
-  Explored how typography, color, and layout can evoke softness and safety. Every element—from the purple flower favicon to the tribute form—was chosen with care.
+  Explored how typography, color, and layout can evoke softness and safety. Every element, from the purple flower favicon to the tribute form was chosen with care.
 
 - **Deployment Confidence**  
-  Successfully deployed via [GitHub Pages / Netlify / Vercel] *(choose one)*, ensuring accessibility and polish.
+  Successfully deployed via [GitHub Pages] ensuring accessibility and polish.
 
 ## Live Site
 
