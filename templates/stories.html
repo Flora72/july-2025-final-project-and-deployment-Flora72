@@ -1,85 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shared Resting Places</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Cormorant+Garamond:wght@500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/static/css/styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shared Resting Places</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Cormorant+Garamond:wght@500;700&display=swap"rel="stylesheet" />
+    <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/50/7c5cbf/flower.png">
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <style>
+        .button-link {
+            display: inline-block;
+            background-color: #7c5cbf;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-link:hover {
+            background-color: #5a3e8c;
+        }
+    </style>
 </head>
+
 <body>
-  <h1>Shared Resting Places</h1>
-  <p>These tributes are offered with tenderness. Each one is a quiet act of remembrance.</p>
+    <h1>Shared Resting Places</h1>
+    <p>These tributes are offered with tenderness. Each one is a quiet act of remembrance.</p>
 
-  <section id="filters">
-    <label for="filter">Filter by Category:</label>
-    <select id="filter">
-      <option value="all">All</option>
-      <option value="relationship">Relationships</option>
-      <option value="home">Homes</option>
-      <option value="dream">Dreams</option>
-      <option value="moment">Moments</option>
-    </select>
-  </section>
+    <section id="filters">
+        <label for="filter">Filter by Category:</label>
+        <select id="filter">
+            <option value="all">All</option>
+            <option value="relationship">Relationships</option>
+            <option value="home">Homes</option>
+            <option value="dream">Dreams</option>
+            <option value="moment">Moments</option>
+        </select>
+    </section>
 
-  <section id="gallery">
-    <!-- Tribute cards will be injected here -->
-  </section>
+    <section id="gallery">
+        <!-- Tribute cards will be injected here -->
+    </section>
 
-  <footer>
-    <a href="submit.html">Share Your Own →</a>
-  </footer>
+    <footer>
+        <a href="submit.html" class="button-link">Share Your Own </a>
+    </footer>
 
-  <script>
-    // Load and render saved tributes from localStorage
-    function renderSavedTributes() {
-      const gallery = document.getElementById('gallery');
-      if (!gallery) return;
+    <script>
+        // Load and render saved tributes from localStorage
+        function renderSavedTributes() {
+            const gallery = document.getElementById('gallery');
+            if (!gallery) return;
 
-      gallery.innerHTML = ''; // Clear existing content
+            gallery.innerHTML = ''; 
 
-      const tributes = JSON.parse(localStorage.getItem('tributes')) || [];
+            const tributes = JSON.parse(localStorage.getItem('tributes')) || [];
 
-      tributes.forEach(({ name, message, category, timestamp }) => {
-        const card = document.createElement('article');
-        card.className = 'tribute-card';
-        card.setAttribute('data-category', category.toLowerCase());
+            tributes.forEach(({ name, message, category, timestamp }) => {
+                const card = document.createElement('article');
+                card.className = 'tribute-card';
+                card.setAttribute('data-category', category.toLowerCase());
 
-        card.innerHTML = `
+                card.innerHTML = `
           <h3>${name || 'Anonymous'}</h3>
           <p>${message}</p>
           <p><em>${new Date(timestamp).toLocaleString()} • Category: ${category}</em></p>
         `;
 
-        gallery.appendChild(card);
-      });
-    }
-
-    // Filter tribute cards by category
-    function filterStories(category) {
-      const cards = document.querySelectorAll('.tribute-card');
-
-      cards.forEach(card => {
-        const cardCategory = card.getAttribute('data-category');
-        if (category === 'all' || cardCategory === category.toLowerCase()) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
+                gallery.appendChild(card);
+            });
         }
-      });
-    }
 
-    // Attach filter logic to dropdown
-    const filterDropdown = document.getElementById('filter');
-    if (filterDropdown) {
-      filterDropdown.addEventListener('change', function () {
-        const selected = this.value;
-        filterStories(selected);
-      });
-    }
+        // Filter tribute cards by category
+        function filterStories(category) {
+            const cards = document.querySelectorAll('.tribute-card');
 
-    // Load tributes on page load
-    document.addEventListener('DOMContentLoaded', renderSavedTributes);
-  </script>
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                if (category === 'all' || cardCategory === category.toLowerCase()) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Attach filter logic to dropdown
+        const filterDropdown = document.getElementById('filter');
+        if (filterDropdown) {
+            filterDropdown.addEventListener('change', function () {
+                const selected = this.value;
+                filterStories(selected);
+            });
+        }
+
+        // Load tributes on page load
+        document.addEventListener('DOMContentLoaded', renderSavedTributes);
+    </script>
 </body>
+
 </html>

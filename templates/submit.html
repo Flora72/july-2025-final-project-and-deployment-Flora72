@@ -1,41 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Cormorant+Garamond:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Cormorant+Garamond:wght@500;700&display=swap"rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/50/7c5cbf/flower.png">
     <link rel="stylesheet" href="/static/css/styles.css">
     <title>Submit</title>
+    <style>
+        .button-link {
+            display: inline-block;
+            background-color: #7c5cbf;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-link:hover {
+            background-color: #5a3e8c;
+        }
+    </style>
 </head>
+
 <body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Resting Places</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="submit.html">Submit</a></li>
+                <li><a href="stories.html">Stories</a></li>
+                <li><a href="map.html">Map</a></li>
+                <li><a href="reflections.html">Reflections</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
     <h1>Share a Resting Place</h1>
-<p>This form is a gentle invitation. You can write as little or as much as you need. There’s no right way to grieve.</p>
+    <p>This form is a gentle invitation. You can write as little or as much as you need. There’s no right way to grieve.
+    </p>
 
-<form>
-  <label for="title">Title (optional)</label>
-  <input type="text" id="title" name="title" placeholder="A friendship, a place, a dream...">
+    <form action="/submit-message" method="POST">
 
-  <label for="category">Category</label>
-  <select id="category" name="category">
-    <option value="relationship">Relationship</option>
-    <option value="home">Home</option>
-    <option value="dream">Dream</option>
-    <option value="moment">Moment</option>
-    <option value="other">Other</option>
-  </select>
+        <label for="title">Title (optional)</label>
+        <input type="text" id="title" name="title" placeholder="A friendship, a place, a dream...">
 
-  <label for="tribute">Your Tribute</label>
-  <textarea id="tribute" name="tribute" rows="6" placeholder="Write your memory, your goodbye, your reflection..."></textarea>
+        <label for="category">Category</label>
+        <select id="category" name="category">
+            <option value="relationship">Relationship</option>
+            <option value="home">Home</option>
+            <option value="dream">Dream</option>
+            <option value="moment">Moment</option>
+            <option value="other">Other</option>
+        </select>
 
-  <label for="anonymous">Post Anonymously?</label>
-  <input type="checkbox" id="anonymous" name="anonymous">
+        <label for="tribute">Your Tribute</label>
+        <textarea id="tribute" name="tribute" rows="6"
+            placeholder="Write your memory, your goodbye, your reflection..."></textarea>
+        <button type="submit">Submit Tribute</button>
+    </form>
 
-  <button type="submit">Submit Tribute</button>
-</form>
+    <footer>
+        <p>Built with care. Held with grace.</p>
+    </footer>
+<script>
+    document.querySelector('form').addEventListener('submit', function (e) {
+        e.preventDefault();
 
-<footer>
-  <a href="index.html">← Back to Home</a>
-</footer>
+        // Create a soft overlay message
+        const messageBox = document.createElement('div');
+        messageBox.textContent = 'Your tribute has been received with tenderness. Thank you for sharing this memory.';
+        messageBox.style.position = 'fixed';
+        messageBox.style.top = '50%';
+        messageBox.style.left = '50%';
+        messageBox.style.transform = 'translate(-50%, -50%)';
+        messageBox.style.backgroundColor = '#f9f6ff';
+        messageBox.style.color = '#5a3e8c';
+        messageBox.style.padding = '1.5rem 2rem';
+        messageBox.style.borderRadius = '12px';
+        messageBox.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+        messageBox.style.fontFamily = 'Cormorant Garamond, serif';
+        messageBox.style.fontSize = '1.2rem';
+        messageBox.style.textAlign = 'center';
+        messageBox.style.zIndex = '1000';
+
+        document.body.appendChild(messageBox);
+
+        // Fade out after a few seconds
+        setTimeout(() => {
+            messageBox.style.transition = 'opacity 1s ease';
+            messageBox.style.opacity = '0';
+            setTimeout(() => messageBox.remove(), 1000);
+        }, 4000);
+
+        this.reset();
+    });
+</script>
 
 </body>
+
 </html>
