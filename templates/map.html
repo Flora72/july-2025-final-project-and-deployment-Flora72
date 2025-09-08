@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Map of Resting Places</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Cormorant+Garamond:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fdfaf8;
+      color: #3e3e3e;
+      line-height: 1.8;
+      padding: 2rem;
+      max-width: 960px;
+      margin: auto;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      color: #4b3b6e;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.125rem;
+      margin-bottom: 1.5rem;
+      color: #4a4a4a;
+    }
+
+    #map {
+      height: 500px;
+      border-radius: 12px;
+      margin-top: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    footer a {
+      color: #7c5cbf;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+      color: #5a3e8c;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Map of Resting Places</h1>
+    <p>This map is symbolic. A constellation of memory. Each dot represents a tribute, a place where something was laid to rest.</p>
+  </header>
+
+  <section id="map-container">
+    <div id="map"></div>
+  </section>
+
+  <footer>
+    <a href="stories.html">← Back to Stories</a>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([-0.5, 37.5], 6);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const tributes = [
+      { name: "The house on 7th Street", message: "Goodbye to jasmine and kitchen light.", coords: [-1.2921, 36.8219], category: "Home" },
+      { name: "A dream I let go", message: "Still visits me in quiet moments.", coords: [-0.0236, 37.9062], category: "Dream" },
+      { name: "The moment she held my hand", message: "It lives forever in silence.", coords: [-1.3733, 36.7445], category: "Moment" },
+      { name: "The river I used to walk beside", message: "It carried my grief gently.", coords: [-0.7191, 36.4310], category: "Grief" },
+      { name: "My grandmother’s garden", message: "The scent of rosemary still lingers.", coords: [-0.1022, 34.7617], category: "Memory" },
+      { name: "The bus stop in Eldoret", message: "Where I said goodbye without knowing.", coords: [0.5204, 35.2698], category: "Moment" },
+      { name: "The hill behind our school", message: "We buried our secrets in the soil.", coords: [-0.3031, 36.0800], category: "Childhood" },
+      { name: "The quiet room in Kisumu", message: "Where silence taught me to breathe.", coords: [-0.0917, 34.7680], category: "Healing" },
+      { name: "The market in Meru", message: "I lost something I couldn’t name.", coords: [0.0476, 37.6550], category: "Loss" },
+      { name: "The road to Ndenderu", message: "Every bend remembers her laughter.", coords: [-1.1900, 36.7500], category: "Relationship" }
+    ];
+
+    tributes.forEach(({ name, message, coords, category }) => {
+      L.marker(coords).addTo(map)
+        .bindPopup(`<strong>${name}</strong><br>${message}<br><em>${category}</em>`);
+    });
+  </script>
+</body>
+</html>
