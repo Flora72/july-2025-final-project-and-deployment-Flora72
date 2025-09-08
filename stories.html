@@ -2,86 +2,94 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shared Resting Places</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Cormorant+Garamond:wght@500;700&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/50/7c5cbf/flower.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shared Resting Places</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Cormorant+Garamond:wght@500;700&display=swap"
+        rel="stylesheet" />
+    <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/50/7c5cbf/flower.png">
 </head>
 
-<body style="margin: 0; font-family: 'Inter', sans-serif; background-color: #f9f7fc; color: #333; padding: 2rem; line-height: 1.6;">
+<body
+    style="margin: 0; font-family: 'Inter', sans-serif; background-color: #f9f7fc; color: #333; padding: 2rem; line-height: 1.6;">
 
-  <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: #5a3e8c; margin-bottom: 0.5rem;">Shared Resting Places</h1>
-  <p style="font-size: 1.1rem; font-style: italic; color: #666; margin-bottom: 2rem;">These tributes are offered with tenderness. Each one is a quiet act of remembrance.</p>
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: #5a3e8c; margin-bottom: 0.5rem;">
+        Shared Resting Places</h1>
+    <p style="font-size: 1.1rem; font-style: italic; color: #666; margin-bottom: 2rem;">These tributes are offered with
+        tenderness. Each one is a quiet act of remembrance.</p>
 
-  <section id="filters" style="margin-bottom: 2rem;">
-    <label for="filter" style="font-weight: 600; margin-right: 0.5rem;">Filter by Category:</label>
-    <select id="filter" style="padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
-      <option value="all">All</option>
-      <option value="relationship">Relationships</option>
-      <option value="home">Homes</option>
-      <option value="dream">Dreams</option>
-      <option value="moment">Moments</option>
-    </select>
-  </section>
+    <section id="filters" style="margin-bottom: 2rem;">
+        <label for="filter" style="font-weight: 600; margin-right: 0.5rem;">Filter by Category:</label>
+        <select id="filter" style="padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem;">
+            <option value="all">All</option>
+            <option value="relationship">Relationships</option>
+            <option value="home">Homes</option>
+            <option value="dream">Dreams</option>
+            <option value="moment">Moments</option>
+        </select>
+    </section>
 
-  <section id="gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-    <!-- Tribute cards will be injected here -->
-  </section>
+    <section id="gallery"
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        <!-- Tribute cards will be injected here -->
+    </section>
 
-  <footer style="margin-top: 3rem; text-align: center;">
-    <a href="submit.html" style="display: inline-block; background-color: #7c5cbf; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 1rem; text-decoration: none; font-weight: 500; transition: background-color 0.3s ease;">Share Your Own</a>
-  </footer>
+    <footer style="margin-top: 3rem; text-align: center;">
+        <a href="submit.html"
+            style="display: inline-block; background-color: #7c5cbf; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 1rem; text-decoration: none; font-weight: 500; transition: background-color 0.3s ease;">Share
+            Your Own</a>
+    </footer>
 
-  <script>
-    function renderSavedTributes() {
-      const gallery = document.getElementById('gallery');
-      if (!gallery) return;
+    <script>
+        function renderSavedTributes() {
+            const gallery = document.getElementById('gallery');
+            if (!gallery) return;
 
-      gallery.innerHTML = '';
+            gallery.innerHTML = '';
 
-      const tributes = JSON.parse(localStorage.getItem('tributes')) || [];
+            const tributes = JSON.parse(localStorage.getItem('tributes')) || [];
 
-      tributes.forEach(({ name, message, category, timestamp }) => {
-        const card = document.createElement('article');
-        card.className = 'tribute-card';
-        card.setAttribute('data-category', category.toLowerCase());
+            tributes.forEach(({ name, message, category, timestamp }) => {
+                const card = document.createElement('article');
+                card.className = 'tribute-card';
+                card.setAttribute('data-category', category.toLowerCase());
 
-        card.style.backgroundColor = '#fff';
-        card.style.border = '1px solid #ddd';
-        card.style.borderRadius = '10px';
-        card.style.padding = '1rem';
-        card.style.boxShadow = '0 2px 6px rgba(0,0,0,0.05)';
+                card.style.backgroundColor = '#fff';
+                card.style.border = '1px solid #ddd';
+                card.style.borderRadius = '10px';
+                card.style.padding = '1rem';
+                card.style.boxShadow = '0 2px 6px rgba(0,0,0,0.05)';
 
-        card.innerHTML = `
+                card.innerHTML = `
           <h3 style="font-family: 'Cormorant Garamond', serif; color: #5a3e8c; margin-top: 0;">${name || 'Anonymous'}</h3>
           <p style="margin: 0.5rem 0;">${message}</p>
           <p style="font-size: 0.9rem; color: #888;"><em>${new Date(timestamp).toLocaleString()} • Category: ${category}</em></p>
         `;
 
-        gallery.appendChild(card);
-      });
-    }
+                gallery.appendChild(card);
+            });
+        }
 
-    function filterStories(category) {
-      const cards = document.querySelectorAll('.tribute-card');
+        function filterStories(category) {
+            const cards = document.querySelectorAll('.tribute-card');
 
-      cards.forEach(card => {
-        const cardCategory = card.getAttribute('data-category');
-        card.style.display = (category === 'all' || cardCategory === category.toLowerCase()) ? 'block' : 'none';
-      });
-    }
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                card.style.display = (category === 'all' || cardCategory === category.toLowerCase()) ? 'block' : 'none';
+            });
+        }
 
-    const filterDropdown = document.getElementById('filter');
-    if (filterDropdown) {
-      filterDropdown.addEventListener('change', function () {
-        const selected = this.value;
-        filterStories(selected);
-      });
-    }
+        const filterDropdown = document.getElementById('filter');
+        if (filterDropdown) {
+            filterDropdown.addEventListener('change', function () {
+                const selected = this.value;
+                filterStories(selected);
+            });
+        }
 
-    document.addEventListener('DOMContentLoaded', renderSavedTributes);
-  </script>
+        document.addEventListener('DOMContentLoaded', renderSavedTributes);
+    </script>
 </body>
 
 </html>
