@@ -17,7 +17,7 @@
 
 ## Live Site
 
-Visit the live site here: [restingplaces.example.com](#)  
+Visit the live site here: [https://flora72.github.io/july-2025-final-project-and-deployment-Flora72/index.html]
 
 
 ## Technical Notes
