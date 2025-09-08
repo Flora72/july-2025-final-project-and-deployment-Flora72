@@ -88,3 +88,6 @@ Deploy your project and confirm that:
 * Clean, well-organized, and commented code
 * Successful live deployment with a working link
 * Evidence of following best practices
+
+### Personal README
+ For personal reflections and deployment notes, see [README.personal.md](README.personal.md)
